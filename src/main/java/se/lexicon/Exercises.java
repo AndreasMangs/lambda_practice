@@ -1,6 +1,12 @@
 package se.lexicon;
 
 import se.lexicon.data.DataStorage;
+import se.lexicon.model.Gender;
+import se.lexicon.model.Person;
+
+import java.time.LocalDate;
+import java.util.List;
+
 
 public class Exercises {
 
@@ -12,6 +18,9 @@ public class Exercises {
     public static void exercise1(String message){
         System.out.println(message);
         //Write your code here
+        
+        List<Person> temp = storage.findMany(person -> person.getFirstName().equals("Erik"));
+        temp.stream().forEach(person -> System.out.println(person.toString()));
 
         System.out.println("----------------------");
     }
@@ -22,6 +31,8 @@ public class Exercises {
     public static void exercise2(String message){
         System.out.println(message);
         //Write your code here
+        List<Person> temp = storage.findMany(person -> person.getGender().equals(Gender.FEMALE));
+        temp.stream().forEach(person -> System.out.println(person.toString()));
 
         System.out.println("----------------------");
     }
@@ -32,6 +43,8 @@ public class Exercises {
     public static void exercise3(String message){
         System.out.println(message);
         //Write your code here
+        List<Person> temp = storage.findMany(person -> person.getBirthDate().isEqual(LocalDate.parse("2000-01-01")) || person.getBirthDate().isAfter(LocalDate.parse("2000-01-01")));
+        temp.stream().forEach(person -> System.out.println(person.toString()));
 
         System.out.println("----------------------");
     }
@@ -42,7 +55,9 @@ public class Exercises {
     public static void exercise4(String message){
         System.out.println(message);
         //Write your code here
+        Person temp = storage.findOne(person -> person.getId() == 123);
 
+        System.out.println(temp.toString());
         System.out.println("----------------------");
 
     }
@@ -54,7 +69,9 @@ public class Exercises {
     public static void exercise5(String message){
         System.out.println(message);
         //Write your code here
+        storage.findOneAndMapToString(p -> p.getId() == 456);
 
+        System.out.println(temp);
         System.out.println("----------------------");
     }
 
