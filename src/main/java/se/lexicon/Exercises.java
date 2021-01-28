@@ -6,6 +6,7 @@ import se.lexicon.model.Gender;
 import se.lexicon.model.Person;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -150,8 +151,12 @@ public class Exercises {
     public static void exercise11(String message){
         System.out.println(message);
         //Write your code here
-        storage.findAndSort(person -> person.getFirstName().startsWith("A"),
-                Comparator.comparing(p -> p.getBirthDate().toString()));
+        List<Person> temp = new ArrayList<>();
+
+        temp = storage.findAndSort(person -> person.getFirstName().startsWith("A"),
+                Comparator.comparing(p -> p.getBirthDate()));
+
+        temp.forEach(person -> System.out.println(person.toString()));
 
         System.out.println("----------------------");
     }
@@ -162,6 +167,12 @@ public class Exercises {
     public static void exercise12(String message){
         System.out.println(message);
         //Write your code here
+        List<Person> temp = new ArrayList<>();
+
+        temp = storage.findAndSort(person -> person.getBirthDate().isBefore(LocalDate.of(1950,01,01)),
+                (p1, p2) -> p2.getBirthDate().compareTo(p1.getBirthDate()));
+
+        temp.forEach(person -> System.out.println(person.toString()));
 
         System.out.println("----------------------");
     }
@@ -172,13 +183,25 @@ public class Exercises {
     public static void exercise13(String message){
         System.out.println(message);
         //Write your code here
+        List<Person> temp = new ArrayList<>();
+        temp = storage.findAndSort(person -> true, Comparator.comparing(Person::getLastName)
+                .thenComparing(Person::getFirstName)
+                .thenComparing(Person::getBirthDate));
 
+/*
+        temp = storage.findAndSort(Comparator
+                .comparing    (p -> p.getLastname())
+                .thenComparing(p -> p.getFirstName())
+                .thenComparing(p -> p.getBirthDate()));
+*/
+
+        temp.forEach(person -> System.out.println(person.toString()));
         System.out.println("----------------------");
     }
 
     public static String reverser(String in){
         StringBuilder sb = new StringBuilder(in);
-        String ss = sb.reverse().toString();
-        return ss;
+        String out = sb.reverse().toString();
+        return out;
     }
 }
