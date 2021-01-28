@@ -184,16 +184,12 @@ public class Exercises {
         System.out.println(message);
         //Write your code here
         List<Person> temp = new ArrayList<>();
-        temp = storage.findAndSort(person -> true, Comparator.comparing(Person::getLastName)
+
+        temp = storage.findAndSort(Comparator
+                .comparing    (Person::getLastName)
                 .thenComparing(Person::getFirstName)
                 .thenComparing(Person::getBirthDate));
 
-/*
-        temp = storage.findAndSort(Comparator
-                .comparing    (p -> p.getLastname())
-                .thenComparing(p -> p.getFirstName())
-                .thenComparing(p -> p.getBirthDate()));
-*/
 
         temp.forEach(person -> System.out.println(person.toString()));
         System.out.println("----------------------");
